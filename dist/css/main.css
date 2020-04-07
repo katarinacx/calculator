@@ -1,3 +1,48 @@
-h1 {
-    color: red;
+body {
+    background-image: url(/images/background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.heading {
+    color: #fff;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.calculator {
+    background-color: #fff;
+    padding: 30px 40px;
+    width: 400px;
+    margin: 0 auto;
+    opacity: 0.4;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.input_number,
+.sum {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+.input_number:focus {
+    outline: #343a40 auto 1px;
+}
+
+.input_number::-webkit-outer-spin-button,
+.input_number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.input_number[type=number] {
+    -moz-appearance: textfield;
+}
+
+.btn {
+    width: 100%;
+    font-size: 15px !important;
 }

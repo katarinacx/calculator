@@ -3,13 +3,45 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <title>Page Title</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>1.1 Basic Calculator</title>
 </head>
 
 <body>
-
-    <h1>This is a H</h1>
-    <p>This is a paragraph.</p>
+    <div class="heading">
+        <h1>1.1 Basic Calculator</h1>
+    </div>
+    <div class="calculator">
+        <div class="row">
+            <div class="col-12">
+                <input type="text" class="sum" id="sum" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="number" class="input_number" id="number_one" pattern="[0-9]">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input type="number" class="input_number" id="number_two" pattern="[0-9]">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button type="button" class="btn btn-dark" id="add" onclick="return addNumbers();">+</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-dark" id="subtract">-</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-dark" id="multiply">x</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-dark" id="divde">&#xF7;</button>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 
