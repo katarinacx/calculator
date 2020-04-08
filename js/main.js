@@ -48,18 +48,42 @@ function clearNumbers() {
     number_two = $("#number_two").val('');
 }
 
-// function which is called when the user clicks the add button - need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
-window.addNumbers = function() {
-    //     Call the function which gets the two numbers from the input boxes
+//function which is called when the user presses any of the equation buttons
+window.numberEquation = function(operation) {
+    //Defining the two variables here
+    var result;
+    var operator;
+
+    //If no numbers have been gotten (not true) then we will return false and stop doing anymore.
     if (!getNumbers()) {
         return false;
     }
-    //     Store in a variable the two numbers added together
-    var result = number_one + number_two;
-    //Store the operator in a variable
-    var operator = $('#add').text();
-    //     Call the function which output the caculated number on the screen, providing the number to output
-    // These two params do not need to be the same name they can simply be outputResult(number_one + number_two, $('add').text());
+
+    //This is a shorter and better way of handling than doing a function for each operation
+    //Im passing operation as a param in the function and using it for this switch (The operation param is determined on what we've passed through in the HTML)
+    switch (operation) {
+        //If what we've passed through in the function is "add" then we will use this calculation
+        case "add":
+            result = number_one + number_two;
+            operator = $('#add').text();
+            break;
+            //If what we've passed through in the function is "subtract" then we will use this calculation
+        case "subtract":
+            result = number_one - number_two;
+            operator = $('#subtract').text();
+            break;
+            //If what we've passed through in the function is "multiply" then we will use this calculation
+        case "multiply":
+            result = number_one * number_two;
+            operator = $('#multiply').text();
+            break;
+            //If what we've passed through in the function is "divide" then we will use this calculation
+        case "divide":
+            result = number_one / number_two;
+            operator = String.fromCharCode(247);
+            break;
+    }
+
     outputResult(result, operator);
     //     Call function which clears input boxes
     clearNumbers();
@@ -67,56 +91,75 @@ window.addNumbers = function() {
     return false;
 };
 
-// function which is called when the user clicks the subtract button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
-window.subtractNumbers = function() {
-    //     Call the function which gets the two numbers from the input boxes
-    if (!getNumbers()) {
-        return false;
-    }
-    //     Store in a variable the two numbers subtracted
-    var result = number_one - number_two;
-    //Store the operator in a variable
-    var operator = $('#subtract').text();
-    //     Call the function which output the caculated number on the screen, providing the number to output
-    outputResult(result, operator);
-    //     Call function which clears input boxes
-    clearNumbers();
-    //     return false to stop the page being submitted
-    return false;
-};
+// // function which is called when the user clicks the add button - need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
+// window.addNumbers = function() {
+//     //     Call the function which gets the two numbers from the input boxes
+//     if (!getNumbers()) {
+//         return false;
+//     }
+//     //     Store in a variable the two numbers added together
+//     var result = number_one + number_two;
+//     //Store the operator in a variable
+//     var operator = $('#add').text();
+//     //     Call the function which output the caculated number on the screen, providing the number to output
+//     // These two params do not need to be the same name they can simply be outputResult(number_one + number_two, $('add').text());
+//     outputResult(result, operator);
+//     //     Call function which clears input boxes
+//     clearNumbers();
+//     //     return false to stop the page being submitted
+//     return false;
+// };
 
-// function which is called when the user clicks the multiply button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
-window.multiplyNumbers = function() {
-    //     Call the function which gets the two numbers from the input boxes
-    if (!getNumbers()) {
-        return false;
-    }
-    //     Store in a variable the two numbers multiply together
-    var result = number_one * number_two;
-    //Store the operator in a variable
-    var operator = $('#multiply').text();
-    //     Call the function which output the caculated number on the screen, providing the number to output
-    outputResult(result, operator);
-    //     Call function which clears input boxes
-    clearNumbers();
-    //     return false to stop the page being submitted
-    return false;
-};
+// // function which is called when the user clicks the subtract button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
+// window.subtractNumbers = function() {
+//     //     Call the function which gets the two numbers from the input boxes
+//     if (!getNumbers()) {
+//         return false;
+//     }
+//     //     Store in a variable the two numbers subtracted
+//     var result = number_one - number_two;
+//     //Store the operator in a variable
+//     var operator = $('#subtract').text();
+//     //     Call the function which output the caculated number on the screen, providing the number to output
+//     outputResult(result, operator);
+//     //     Call function which clears input boxes
+//     clearNumbers();
+//     //     return false to stop the page being submitted
+//     return false;
+// };
 
-// function which is called when the user clicks the divide button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
-window.divideNumbers = function() {
-    //     Call the function which gets the two numbers from the input boxes
-    if (!getNumbers()) {
-        return false;
-    }
-    //     Store in a variable the two numbers divided
-    var result = number_one / number_two;
-    //Store the operator in a variable
-    var operator = String.fromCharCode(247);
-    //     Call the function which output the caculated number on the screen, providing the number to output
-    outputResult(result, operator);
-    //     Call function which clears input boxes
-    clearNumbers();
-    //     return false to stop the page being submitted
-    return false;
-};
+// // function which is called when the user clicks the multiply button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
+// window.multiplyNumbers = function() {
+//     //     Call the function which gets the two numbers from the input boxes
+//     if (!getNumbers()) {
+//         return false;
+//     }
+//     //     Store in a variable the two numbers multiply together
+//     var result = number_one * number_two;
+//     //Store the operator in a variable
+//     var operator = $('#multiply').text();
+//     //     Call the function which output the caculated number on the screen, providing the number to output
+//     outputResult(result, operator);
+//     //     Call function which clears input boxes
+//     clearNumbers();
+//     //     return false to stop the page being submitted
+//     return false;
+// };
+
+// // function which is called when the user clicks the divide button- need to put window. due to using webpack compiler and ES6. (Only if we wanted to use in the HTML).
+// window.divideNumbers = function() {
+//     //     Call the function which gets the two numbers from the input boxes
+//     if (!getNumbers()) {
+//         return false;
+//     }
+//     //     Store in a variable the two numbers divided
+//     var result = number_one / number_two;
+//     //Store the operator in a variable
+//     var operator = String.fromCharCode(247);
+//     //     Call the function which output the caculated number on the screen, providing the number to output
+//     outputResult(result, operator);
+//     //     Call function which clears input boxes
+//     clearNumbers();
+//     //     return false to stop the page being submitted
+//     return false;
+// };
