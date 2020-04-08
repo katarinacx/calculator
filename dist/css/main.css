@@ -42,6 +42,10 @@ body {
     -moz-appearance: textfield;
 }
 
+.error {
+    border: red 1px solid;
+}
+
 .btn {
     width: 100%;
     font-size: 15px !important;
