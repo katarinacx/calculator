@@ -12,34 +12,24 @@ body {
 }
 
 .calculator {
-    background-color: #fff;
     padding: 30px 40px;
     width: 400px;
     margin: 0 auto;
-    opacity: 0.4;
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 20px;
     margin-top: 30px;
 }
 
-.input_number,
 .sum {
     width: 100%;
     margin-bottom: 15px;
     padding: 5px;
-    border-radius: 3px;
+    border-radius: 6px;
+    opacity: 0.7;
 }
 
-.input_number:focus {
-    outline: #343a40 auto 1px;
-}
-
-.input_number::-webkit-outer-spin-button,
-.input_number::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-.input_number[type=number] {
-    -moz-appearance: textfield;
+.sum:disabled {
+    background-color: #fff;
 }
 
 .error {
@@ -49,4 +39,18 @@ body {
 .btn {
     width: 100%;
     font-size: 15px !important;
+}
+
+.btn-light,
+.btn-dark {
+    opacity: 0.7 !important;
+}
+
+.number_rows {
+    margin-bottom: 15px;
+}
+
+.button-col {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
