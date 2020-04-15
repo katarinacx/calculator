@@ -1,18 +1,23 @@
 //variables with i_ = int
 //variables with s_ = string
+//variables with b_ = bool
+//Don't need to put a return in the html for an onclick if it's not a button as it's not submitting anything
 
 //Need to import the $ function from jquery so I can use it in this file. This is due to webpack compiler and ES6.
 import $ from "jquery";
 
 //Declaring these variables in the global scope so they can be accessed by any function (e.g. we're gonna need these when the user presses the equals operator)
-var s_operation;
-var i_number_one;
-var i_number_two;
+var s_operation = "";
+var i_number_one = null;
+var i_number_two = null;
 //Finding out whether the user has pressed the equals key. Setting the default to false because the user initally hasn't pressed the key
 var b_has_pressed_equals = false;
 
 //function to get each number whenever the user clicks a number button
 window.appendNumber = function(i_number) {
+    if ($('#sum').val() === '0') {
+        $('#sum').val('');
+    }
     //If the user has pressed the equals key then set the input sum (from the HTML) to nothing
     if (b_has_pressed_equals) {
         //Emptying the html element because if we don't, the number that is displayed (the result) will have the new number appended to it
@@ -45,7 +50,6 @@ window.setNumberFromDisplay = function() {
 };
 
 window.setOperation = function(s_operator) {
-
     //Store the current number into a variable that the user has inputted 
     //Using the function above
     window.setNumberFromDisplay();
@@ -53,17 +57,23 @@ window.setOperation = function(s_operator) {
     //Store operation into a variable so we can use it later when the user presses the equals button
     //Getting the param from the HTML
     s_operation = s_operator;
+    b_has_pressed_equals = false;
 
     //Clear the input field ready for the user to tell us the second number
     $('#sum').val('');
 };
 
 window.result = function() {
+    console.log("result", 1);
     //Setting the variable of whether the user has pressed the equals key to true because result is called when the user presses the equals key
     b_has_pressed_equals = true;
     //Store the second number into a variable, getting the value from the element
     //Using the function above
     window.setNumberFromDisplay();
+
+    if ((typeof i_number_one !== 'number' || typeof i_number_two !== 'number' || isNaN(i_number_one) || isNaN(i_number_two)) && s_operation !== "squared") {
+        return false;
+    }
     //Declare a variable to hold the outcome of the equation
     var result;
     var operator_html;
@@ -89,16 +99,43 @@ window.result = function() {
             result = i_number_one / i_number_two;
             operator_html = String.fromCharCode(247);
             break;
+        case "squared":
+            result = Math.pow(i_number_one, 2);
+            i_number_two = i_number_one;
+            operator_html = $('#multiply').text();
+            break;
+        default:
+            return false;
     }
 
     $('#sum').val(result);
     //Putting the sum into the html element that we have created in this function
     window.outputResult(i_number_one + operator_html + i_number_two + '=' + result);
+    i_number_one = result;
 };
 
 window.outputResult = function(s_sum) {
     //Creating the html element string to put in a history of the sums. s_sum is from param given from the previous function
-    var html = '<div class="row"><div class="col-12">' + s_sum + '</div></div>';
+    var html = '<div class="row"><div class="col-12 history_style">' + s_sum + '</div></div>';
     //Putting the html element string into the div id we created. We are prepending it so that the html element string is going above the existing content of that div
     $('#calculation-history').prepend(html);
+};
+
+window.toggleHistory = function() {
+    $('.calculation-history').toggle();
+
+    if (!$('.calculation-history').is(':visible')) {
+        $('.calculator').parent().addClass('offset-3');
+        $('.toggle-history-btn').text("Show history");
+    } else {
+        $('.calculator').parent().removeClass('offset-3');
+        $('.toggle-history-btn').text("Hide history");
+    }
+};
+
+window.clearAllInput = function() {
+    s_operation = "";
+    i_number_one = null;
+    i_number_two = null;
+    $('#sum').val('0');
 };

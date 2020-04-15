@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px !important;
 }
 
 .heading {
@@ -11,13 +12,18 @@ body {
     margin-top: 100px;
 }
 
-.calculator {
-    padding: 30px 40px;
-    width: 400px;
+.wrapper {
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    width: 800px;
+}
+
+.calculator {
+    padding: 30px 40px !important;
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 20px;
     margin-top: 30px;
+    height: 350px;
 }
 
 .sum {
@@ -53,4 +59,34 @@ body {
 .button-col {
     padding-left: 5px !important;
     padding-right: 5px !important;
+}
+
+.calculation-history {
+    padding: 30px 40px !important;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    margin-top: 30px;
+    height: 350px;
+}
+
+#calculation-history {
+    width: 100%;
+    height: calc(100% - 25px);
+    text-align: left;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.history_style {
+    color: #343a40;
+}
+
+h4 {
+    font-size: 18px !important;
+    color: #343a40;
+}
+
+.toggle-history-btn {
+    opacity: 0.9 !important;
+    width: auto;
 }
