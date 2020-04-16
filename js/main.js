@@ -15,6 +15,7 @@ var b_has_pressed_equals = false;
 
 //function to get each number whenever the user clicks a number button
 window.appendNumber = function(i_number) {
+    // If the input box is equal to 0 then we went to set it to nothing to make sure the 0 isn't being appended
     if ($('#sum').val() === '0') {
         $('#sum').val('');
     }
@@ -41,11 +42,12 @@ window.appendNumber = function(i_number) {
 window.setNumberFromDisplay = function() {
     //If there's no operator stored then set the value of the sum HTML element to number_one
     if (!s_operation) {
-        i_number_one = parseInt($('#sum').val());
+        //This was originally a parseInt but because I'm using decimals, it needed to be changed to parseFloat. 
+        i_number_one = parseFloat($('#sum').val());
     }
     //If there is then set the value of the sum HTML element to number_two
     else {
-        i_number_two = parseInt($('#sum').val());
+        i_number_two = parseFloat($('#sum').val());
     }
 };
 
@@ -57,6 +59,7 @@ window.setOperation = function(s_operator) {
     //Store operation into a variable so we can use it later when the user presses the equals button
     //Getting the param from the HTML
     s_operation = s_operator;
+    //Need to set the bool back to false. This is because it will go into the appendNumber() if statement and set the operator as empty. 
     b_has_pressed_equals = false;
 
     //Clear the input field ready for the user to tell us the second number
@@ -64,13 +67,12 @@ window.setOperation = function(s_operator) {
 };
 
 window.result = function() {
-    console.log("result", 1);
     //Setting the variable of whether the user has pressed the equals key to true because result is called when the user presses the equals key
     b_has_pressed_equals = true;
     //Store the second number into a variable, getting the value from the element
     //Using the function above
     window.setNumberFromDisplay();
-
+    //Sanity checking. Checking whether the user has entered both numbers before they can do the same. If they're not it will return false and won't do the rest of the function. Checking whether number_one or number_two has a type of number. Or its checking whether number_one or number_two is actually a number. And it's making sure the operation isn't squared, as we are setting number_two variables later in this switch statement so we need to ignore this operation. 
     if ((typeof i_number_one !== 'number' || typeof i_number_two !== 'number' || isNaN(i_number_one) || isNaN(i_number_two)) && s_operation !== "squared") {
         return false;
     }
@@ -99,11 +101,15 @@ window.result = function() {
             result = i_number_one / i_number_two;
             operator_html = String.fromCharCode(247);
             break;
+            //If what we've passed through in the function is "squared" then we will use this calculation
         case "squared":
+            //Math.pow(base, exponent) So it would be i_number_one^2
             result = Math.pow(i_number_one, 2);
+            //Setting number_two to be the same number and number_one because we're squaring it by itself and it needs to be stored in the history. outputResult needs a number_two variable for it to execute. 
             i_number_two = i_number_one;
             operator_html = $('#multiply').text();
             break;
+            //If we don't choose an operation it will come into this default case and return false which means it won't execute the rest of the function
         default:
             return false;
     }
@@ -111,7 +117,10 @@ window.result = function() {
     $('#sum').val(result);
     //Putting the sum into the html element that we have created in this function
     window.outputResult(i_number_one + operator_html + i_number_two + '=' + result);
+    //Setting the number one variable to the result of the last sum so we can carry on with the next sum
     i_number_one = result;
+    //Refocuses on the document instead of any button that we've used onkeydown on
+    $('document').focus();
 };
 
 window.outputResult = function(s_sum) {
@@ -122,20 +131,106 @@ window.outputResult = function(s_sum) {
 };
 
 window.toggleHistory = function() {
+    //Toggling whether we want to show the calculation history or not. Toggle handles show and hide for us
     $('.calculation-history').toggle();
 
+    //If the calculation history is not visisble then we want to move the calculator back into the middle by offsetting it and changing the text of the toggle history button to say show
     if (!$('.calculation-history').is(':visible')) {
-        $('.calculator').parent().addClass('offset-3');
+        $('.calculator').parent().addClass('offset-md-3');
         $('.toggle-history-btn').text("Show history");
     } else {
-        $('.calculator').parent().removeClass('offset-3');
+        //Do the opposite
+        $('.calculator').parent().removeClass('offset-md-3');
         $('.toggle-history-btn').text("Hide history");
     }
 };
 
 window.clearAllInput = function() {
+    //This is for the C button and it will clear everything that has been set and make sure the input is back to 0
     s_operation = "";
     i_number_one = null;
     i_number_two = null;
     $('#sum').val('0');
+};
+
+window.deleteNumbers = function() {
+    //Giving the input a variable name
+    var inputDisplay = $('#sum').val();
+    //We are then giving the new string in the input a variable name. We want to take a number off the end of the number_one or number_two everytime the button gets pressed
+    var newInputDisplay = inputDisplay.substring(0, inputDisplay.length - 1);
+    //Then putting this back in the input
+    $('#sum').val(newInputDisplay);
+
+    //If there is no value then we want to show a number 0 in the input
+    if (!$('#sum').val()) {
+        $('#sum').val('0');
+    }
+};
+
+//We need a new function which calls the document and not the window for us to use onkeydown
+document.onkeydown = function() {
+    //We are doing this based off of the keyCode that is pressed on the keyboard
+    //And calling the function we need and passing in the param that we want if there's one needed
+    switch (window.event.keyCode) {
+        case 8:
+            window.deleteNumbers();
+            break;
+        case 48:
+        case 96:
+            window.appendNumber(0);
+            break;
+        case 49:
+        case 97:
+            window.appendNumber(1);
+            break;
+        case 50:
+        case 98:
+            window.appendNumber(2);
+            break;
+        case 51:
+        case 99:
+            window.appendNumber(3);
+            break;
+        case 52:
+        case 100:
+            window.appendNumber(4);
+            break;
+        case 53:
+        case 101:
+            window.appendNumber(5);
+            break;
+        case 54:
+        case 102:
+            window.appendNumber(6);
+            break;
+        case 55:
+        case 103:
+            window.appendNumber(7);
+            break;
+        case 56:
+        case 104:
+            window.appendNumber(8);
+            break;
+        case 57:
+        case 105:
+            window.appendNumber(9);
+            break;
+        case 13:
+            window.result();
+            break;
+        case 107:
+            window.setOperation('add');
+            break;
+        case 109:
+            window.setOperation('subtract');
+            break;
+        case 111:
+            window.setOperation('divide');
+            break;
+        case 106:
+            window.setOperation('multiply');
+            break;
+    }
+    //Returning false so we break out of this function to stop it doing it again and again
+    return false;
 };

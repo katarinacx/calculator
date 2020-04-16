@@ -14,7 +14,7 @@
     </div>
     <div class="wrapper">
         <div class="row">
-            <div class="col-6">
+            <div class="col-8 offset-2 col-md-6 offset-md-0">
                 <div class="calculator">
                     <div class="row">
                         <div class="col-12 button-col">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="row number_rows">
                         <div class="col-3 button-col">
-                            <button type="button" class="btn btn-dark" onclick="">.</button>
+                            <button type="button" class="btn btn-dark" onclick="return appendNumber('.');">.</button>
                         </div>
                         <div class="col-3 button-col">
                             <button type="button" class="btn btn-dark" onclick="return setOperation('squared');">x²</button>
@@ -32,7 +32,7 @@
                             <button type="button" class="btn btn-dark" onclick="return clearAllInput();">C</button>
                         </div>
                         <div class="col-3 button-col">
-                            <button type="button" class="btn btn-dark" onclick="">⇦</button>
+                            <button type="button" class="btn btn-dark" onclick="return deleteNumbers();">⇦</button>
                         </div>
                     </div>
                     <div class="row number_rows">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-8 offset-2 col-md-6 offset-md-0">
                 <div class="calculation-history">
                     <h4>History</h4>
                     <div id="calculation-history"></div>
