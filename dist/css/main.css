@@ -1,45 +1,46 @@
 body {
-    background-image: url(/images/background.jpg);
-    background-repeat: no-repeat;
+    background: url(/images/background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px !important;
+    overflow-x: hidden;
+    padding: 15px;
 }
 
 .heading {
     color: #fff;
     text-align: center;
-    margin-top: 100px;
-}
-
-.calculator {
-    background-color: #fff;
-    padding: 30px 40px;
-    width: 400px;
-    margin: 0 auto;
-    opacity: 0.4;
-    border-radius: 20px;
     margin-top: 30px;
 }
 
-.input_number,
+.wrapper {
+    margin: 0 auto;
+    text-align: center;
+    width: 800px;
+    max-width: 100%;
+}
+
+.calculator {
+    padding: 30px 40px !important;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    margin-top: 30px;
+    height: 350px;
+}
+
 .sum {
     width: 100%;
     margin-bottom: 15px;
     padding: 5px;
-    border-radius: 3px;
+    border-radius: 6px;
+    opacity: 0.7;
 }
 
-.input_number:focus {
-    outline: #343a40 auto 1px;
-}
-
-.input_number::-webkit-outer-spin-button,
-.input_number::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-.input_number[type=number] {
-    -moz-appearance: textfield;
+.sum:disabled {
+    background-color: #fff;
 }
 
 .error {
@@ -49,4 +50,48 @@ body {
 .btn {
     width: 100%;
     font-size: 15px !important;
+}
+
+.btn-light,
+.btn-dark {
+    opacity: 0.7 !important;
+}
+
+.number_rows {
+    margin-bottom: 15px;
+}
+
+.button-col {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.calculation-history {
+    padding: 30px 40px !important;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    margin-top: 30px;
+    height: 350px;
+}
+
+#calculation-history {
+    width: 100%;
+    height: calc(100% - 25px);
+    text-align: left;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.history_style {
+    color: #343a40;
+}
+
+h4 {
+    font-size: 18px !important;
+    color: #343a40;
+}
+
+.toggle-history-btn {
+    opacity: 0.9 !important;
+    width: auto;
 }

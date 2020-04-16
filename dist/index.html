@@ -4,41 +4,97 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>1.1 Basic Calculator</title>
+    <title>1.2 Basic Calculator</title>
 </head>
 
 <body>
     <div class="heading">
-        <h1>1.1 Basic Calculator</h1>
+        <h1>1.2 Basic Calculator</h1>
+        <button class="btn btn-dark toggle-history-btn" onclick="return toggleHistory();">Hide history</button>
     </div>
-    <div class="calculator">
+    <div class="wrapper">
         <div class="row">
-            <div class="col-12">
-                <input type="text" class="sum" id="sum" disabled>
+            <div class="col-8 offset-2 col-md-6 offset-md-0">
+                <div class="calculator">
+                    <div class="row">
+                        <div class="col-12 button-col">
+                            <input type="text" class="sum" id="sum" value="0" disabled>
+                        </div>
+                    </div>
+                    <div class="row number_rows">
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" onclick="return appendNumber('.');">.</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" onclick="return setOperation('squared');">x²</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" onclick="return clearAllInput();">C</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" onclick="return deleteNumbers();">⇦</button>
+                        </div>
+                    </div>
+                    <div class="row number_rows">
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="7" onclick="return appendNumber(7);">7</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="8" onclick="return appendNumber(8);">8</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="9" onclick="return appendNumber(9);">9</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" id="add" onclick="return setOperation('add');">+</button>
+                        </div>
+                    </div>
+                    <div class="row number_rows">
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="4" onclick="return appendNumber(4);">4</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="5" onclick="return appendNumber(5);">5</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="6" onclick="return appendNumber(6);">6</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" id="subtract" onclick="return setOperation('subtract');">-</button>
+                        </div>
+                    </div>
+                    <div class="row number_rows">
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="1" onclick="return appendNumber(1);">1</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="2" onclick="return appendNumber(2);">2</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-light" value="3" onclick="return appendNumber(3);">3</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" id="multiply" onclick="return setOperation('multiply');">x</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 button-col">
+                            <button type="button" class="btn btn-light" value="0" onclick="return appendNumber(0);">0</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" id=equals onclick="return result();">=</button>
+                        </div>
+                        <div class="col-3 button-col">
+                            <button type="button" class="btn btn-dark" id="divde" onclick="return setOperation('divide');">&#247;</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <input type="number" class="input_number" id="number_one" pattern="[0-9]">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <input type="number" class="input_number" id="number_two" pattern="[0-9]">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <button type="button" class="btn btn-dark" id="add" onclick="return numberEquation('add');">+</button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-dark" id="subtract" onclick="return numberEquation('subtract');">-</button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-dark" id="multiply" onclick="return numberEquation('multiply');">x</button>
-            </div>
-            <div class="col-3">
-                <button type="button" class="btn btn-dark" id="divde" onclick="return numberEquation('divide');">&#247;</button>
+            <div class="col-8 offset-2 col-md-6 offset-md-0">
+                <div class="calculation-history">
+                    <h4>History</h4>
+                    <div id="calculation-history"></div>
+                </div>
             </div>
         </div>
     </div>
